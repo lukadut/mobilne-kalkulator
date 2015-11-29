@@ -11,6 +11,7 @@ import org.w3c.dom.Text;
  */
 public class ButtonClickListener implements View.OnClickListener {
     static TextView textView;
+    static Calculator calc = new Calculator();
     String value;
     public ButtonClickListener(){
         super();
@@ -25,12 +26,11 @@ public class ButtonClickListener implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        textView.setText(value);
-        Calculator calc = new Calculator();
-        //calc.parseText("2+2");
-        calc.parseText("2/0");
-        //calc.parseText("2*2");
-       // calc.parseText("2-2");
-        textView.setText(calc.result());
+        String currentText = textView.getText().toString();
+        if(currentText.length()==1 && currentText.codePointAt(0)==48) {
+            textView.setText("");
+        }
+        textView.append(value);
+
     }
 }

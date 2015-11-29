@@ -13,25 +13,26 @@ public class Calculator {
     //String[] operations = {"+","-","*","/"};
     public void parseText(String text){
         String[] parts;
-        parts = text.split("[\\+\\*-/]");
+        parts = text.split("[\\+\\-\\*\\/]");//"[\\+\\*-/]"
         for(int i=0; i<parts.length;i++){
-            Log.d("CALC", i + " " + parts[i] + " operator " + text.replaceAll("\\d", ""));
+            Log.d("CALC", i + " " + parts[i] + " operator " + text.replaceAll("[\\d\\.\\w]", ""));
         }
-        operation = text.replaceAll("[\\d\\.]+", "");
-        if(parts.length>0){
+        operation = text.replaceAll("[\\d\\.\\w]", "");
+        if(parts.length==2){
             first = Double.parseDouble(parts[0]);
             second = (parts[1]==null)? 0. :  Double.parseDouble(parts[1]);
         }
 
     }
     public String result(){
-        String res = calculate();
-        DecimalFormat format = new DecimalFormat("0.#");
-        try{
-            Double.parseDouble(res);
-            return format.format(res);
-        } catch (Exception e){
+        try {
+            String res = calculate();
+            Log.d("wynik", res);
+            res = res.replaceFirst("\\.0+", "");
             return  res;
+        } catch (Exception e){
+            e.printStackTrace();
+            return e.getMessage();
         }
 
     }
@@ -53,7 +54,7 @@ public class Calculator {
                     first = Double.NaN;
                     second = Double.NaN;
                     operation = "";
-                    return "Dzielenie przez 0";
+                    throw new ArithmeticException("Divide by 0");
                 }
             }
              default:{

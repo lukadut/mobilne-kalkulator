@@ -15,6 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     List<Button> numberButtons;
+    Button clear,back,add,sub,mul,div,dot,result;
     TextView textView ;//= ((TextView)findViewById(R.id.textView));
 
     @Override
@@ -35,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
             b.setOnClickListener(new ButtonClickListener(b.getText().toString()));
             numberButtons.add(b);
         }
-        Log.d("buttony", numberButtons.size()+"");
+        Log.d("buttony", numberButtons.size() + "");
     }
+    private void getSpecialButtons(){
+        //TODO
+        clear = ((Button) findViewById(R.id.buttonClear));
+        back = ((Button) findViewById(R.id.buttonBack));
+        dot = ((Button) findViewById(R.id.buttonPoint));
+        add = ((Button) findViewById(R.id.buttonPlus));
+        sub = ((Button) findViewById(R.id.buttonMinus));
+        div = ((Button) findViewById(R.id.buttonDiv));
+        mul = ((Button) findViewById(R.id.buttonMul));
+    }
+
 }
