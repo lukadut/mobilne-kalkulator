@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
  * Created by Łukasz on 2015-11-29.
  */
 public class Calculator {
+
     double first, second;
     String operation = null;
     //String[] operations = {"+","-","*","/"};
@@ -24,11 +25,16 @@ public class Calculator {
         }
 
     }
+    public String lastOperator(){
+        return operation;
+    }
     public String result(){
         try {
             String res = calculate();
             Log.d("wynik", res);
             res = res.replaceFirst("\\.0+", "");
+            first=Double.parseDouble(res);
+
             return  res;
         } catch (Exception e){
             e.printStackTrace();
@@ -51,9 +57,7 @@ public class Calculator {
                 try {
                     return div()+"";
                 } catch (Exception e){
-                    first = Double.NaN;
-                    second = Double.NaN;
-                    operation = "";
+                    clear();
                     throw new ArithmeticException("Divide by 0");
                 }
             }
@@ -78,5 +82,10 @@ public class Calculator {
             throw new Exception("Divide by 0");
         }
         return first/second;
+    }
+    public void clear(){
+        first=0;
+        second=Double.NaN;
+        operation="";
     }
 }
