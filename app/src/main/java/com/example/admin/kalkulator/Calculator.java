@@ -10,17 +10,22 @@ import java.text.DecimalFormat;
 public class Calculator {
 
     double first, second;
-    String operation = null;
+    String operation = "";
     //String[] operations = {"+","-","*","/"};
     public void parseText(String text){
         String[] parts;
+        int negativeNumber= 1;
+        if(text.charAt(0)=='-'){
+            negativeNumber= -1;
+            text = text.substring(1);
+        }
         parts = text.split("[\\+\\-\\*\\/]");//"[\\+\\*-/]"
         for(int i=0; i<parts.length;i++){
             Log.d("CALC", i + " " + parts[i] + " operator " + text.replaceAll("[\\d\\.\\w]", ""));
         }
         operation = text.replaceAll("[\\d\\.\\w]", "");
+        first = Double.parseDouble(parts[0])*negativeNumber;
         if(parts.length==2){
-            first = Double.parseDouble(parts[0]);
             second = (parts[1]==null)? 0. :  Double.parseDouble(parts[1]);
         }
 
@@ -29,12 +34,19 @@ public class Calculator {
         return operation;
     }
     public String result(){
+        if((Double.isNaN(second))){
+            String res = first+"";
+            res = res.replaceFirst("\\.0+", "");
+            return res;
+        }
         try {
             String res = calculate();
             Log.d("wynik", res);
             res = res.replaceFirst("\\.0+", "");
             first=Double.parseDouble(res);
-
+            if(res.equals("-0")){
+                return "0";
+            }
             return  res;
         } catch (Exception e){
             e.printStackTrace();
@@ -62,7 +74,7 @@ public class Calculator {
                 }
             }
              default:{
-                 return "Error";
+                 return first+"";
              }
 
         }

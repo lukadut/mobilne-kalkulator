@@ -1,6 +1,7 @@
 package com.example.admin.kalkulator;
 
 import android.os.Debug;
+import android.text.BoringLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -12,8 +13,9 @@ import org.w3c.dom.Text;
  */
 public class ButtonNumberClickListener implements View.OnClickListener {
     static TextView textView;
-    static Calculator calc = new Calculator();
+    static Calculator calc = MainActivity.getCalculator();
     String value;
+    static Boolean cleanDisplayMode=false;
     public ButtonNumberClickListener(){
         super();
     }
@@ -25,16 +27,19 @@ public class ButtonNumberClickListener implements View.OnClickListener {
      public static void setTextView(TextView textView_){
         textView = textView_;
     }
+
+
     public void before(){
+        String currentText = textView.getText().toString();
+        if(currentText.equals("0") || cleanDisplayMode) {
+            textView.setText("");
+        }
 
     }
 
     public void displayAction(){
-        String currentText = textView.getText().toString();
-        if(currentText.length()==1 && currentText.codePointAt(0)==48) {
-            textView.setText("");
-        }
         textView.append(value);
+        cleanDisplayMode=false;
         Log.d("listner", "klik klik");
     }
     public void after(){

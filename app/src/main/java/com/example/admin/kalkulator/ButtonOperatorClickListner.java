@@ -16,10 +16,12 @@ public class ButtonOperatorClickListner extends ButtonNumberClickListener {
 
     @Override
     public void before(){
+        cleanDisplayMode=false;
         String currentText = textView.getText().toString();
-        if(currentText.split("[\\+\\-\\*\\/]").length==2){
-            MainActivity.calculator.parseText(currentText);
-            textView.setText(MainActivity.calculator.result());
+        String[] parts = currentText.split("[\\+\\-\\*\\/]");
+        if(parts.length==2 && currentText.charAt(0)!='-' || parts.length==3 && currentText.charAt(0)=='-'){
+            MainActivity.getCalculator().parseText(currentText);
+            textView.setText(MainActivity.getCalculator().result());
         }
     }
     @Override

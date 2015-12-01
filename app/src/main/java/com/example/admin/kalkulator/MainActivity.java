@@ -13,10 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static Calculator calculator = new Calculator();
+    private static Calculator calculator = new Calculator();
     List<Button> numberButtons, operationButtons;
     Button clear,back,add,sub,mul,div,dot,result;
     TextView textView ;//= ((TextView)findViewById(R.id.textView));
+
+    public static Calculator getCalculator(){
+        return calculator;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         sub = ((Button) findViewById(R.id.buttonMinus));
         div = ((Button) findViewById(R.id.buttonDiv));
         mul = ((Button) findViewById(R.id.buttonMul));
-
+        result = ((Button) findViewById(R.id.buttonResult));
         operationButtons.add(sub);
         operationButtons.add(add);
         operationButtons.add(div);
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         for(Button b: operationButtons){
             b.setOnClickListener(new ButtonOperatorClickListner(b.getText().toString()));
         }
+
+        result.setOnClickListener(new ButtonResultClickListner());
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
