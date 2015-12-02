@@ -30,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
         ButtonNumberClickListener.setTextView(textView);
         getNumberButtons();
         getSpecialButtons();
+        if(savedInstanceState != null){
+            textView.setText(savedInstanceState.getString("textView"));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("textView", textView.getText().toString());
     }
 
     private void getNumberButtons(){
@@ -71,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("0");
             }
         });
+        dot.setOnClickListener(new ButtonPointClickListner(dot.getText().toString()));
+        back.setOnClickListener(new ButtonBackClickListner());
     }
 
 }
