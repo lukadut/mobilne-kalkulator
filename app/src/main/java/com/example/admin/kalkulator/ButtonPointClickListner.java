@@ -35,25 +35,13 @@ public class ButtonPointClickListner extends ButtonNumberClickListener {
             }
             textView.append("0");
         }
-        if(currentText.indexOf("|") == -1){
-            if(currentText.indexOf(".")>=0){
+        if(currentText.indexOf("|") == -1) {
+            if (currentText.indexOf(".") >= 0) {
                 setAvailablePoint(false);
-            }
-            else{
+            } else {
                 setAvailablePoint(true);
             }
         }
-
-        //String currentText = textView.getText().toString().substring(1);
-        //currentText = currentText.replaceAll("[\\+\\-\\*\\/]","|");
-        //String[] parts = currentText.split("|");
-
-        //if(parts[0].indexOf(".") <0){
-        //    availablePoint=true;
-        //}
-        //if(currentText.indexOf("|") > currentText.lastIndexOf(".")){
-        //    availablePoint= true;
-        //}
 
     }
     @Override
@@ -63,7 +51,6 @@ public class ButtonPointClickListner extends ButtonNumberClickListener {
             textView.append(value);
             availablePoint=false;
         }
-        Log.d("listner", "klik klik");
     }
 
     @Override

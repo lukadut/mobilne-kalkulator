@@ -19,11 +19,25 @@ public class Calculator {
             negativeNumber= -1;
             text = text.substring(1);
         }
-        parts = text.split("[\\+\\-\\*\\/]");//"[\\+\\*-/]"
-        for(int i=0; i<parts.length;i++){
-            Log.d("CALC", i + " " + parts[i] + " operator " + text.replaceAll("[\\d\\.\\w]", ""));
+        String minusE="";
+        if(text.indexOf("E-")>=0){
+            int index = text.indexOf("E-");
+            minusE = text.substring(index,index+2);
+            Log.d("minusE1", minusE);
+            text=text.replace("E-","EMINUS");
+            Log.d("minusE2", minusE);
         }
-        operation = text.replaceAll("[\\d\\.\\w]", "");
+        parts = text.split("[\\+\\-\\*\\/]");//"[\\+\\*-/]"
+        if(parts.length>1) {
+            operation = text.replaceAll("[\\d\\.\\w]", "");
+        }
+        Log.d("minusE1", minusE);
+        Log.d("part10", parts[0]);
+        Log.d("EMINUS POSITION", parts[0].indexOf("EMINUS")+"");
+        if(parts[0].indexOf("EMINUS")>=0){
+            Log.d("minusE3", minusE);
+            parts[0] = parts[0].replace("EMINUS", minusE);
+        }
         first = Double.parseDouble(parts[0])*negativeNumber;
         if(parts.length==2){
             second = (parts[1]==null)? 0. :  Double.parseDouble(parts[1]);
@@ -42,18 +56,23 @@ public class Calculator {
                 blocked=true;
             }
             String res = first+"";
-            res = res.replaceFirst("\\.0+", "");
+            res = (res.indexOf(".0")==res.length()-2)?  res.replaceFirst("\\.0", "") : res;
             if(res.indexOf(".")>=0){
                 ButtonPointClickListner.setAvailablePoint(false);
             }else{
                 ButtonPointClickListner.setAvailablePoint(true);
             }
+
             return res;
         }
         try {
             String res = calculate();
+
+            Log.d("res.indexOf(\".0\")", res.indexOf(".0")+"");
+            Log.d("res.length()-2", res.length()-2+"");
             Log.d("wynik", res);
-            res = res.replaceFirst("\\.0+", "");
+            res = (res.indexOf(".0")==res.length()-2)?  res.replaceFirst("\\.0", "") : res;
+
             first=Double.parseDouble(res);
             if(res.indexOf(".")>=0){
                 ButtonPointClickListner.setAvailablePoint(false);
@@ -74,7 +93,7 @@ public class Calculator {
         }
 
     }
-    private String calculate(){
+    private String calculate() throws Exception {
         switch (operation) {
             case "+":{
                 return add()+"";
@@ -88,9 +107,9 @@ public class Calculator {
             case "/":{
                 try {
                     return div()+"";
-                } catch (Exception e){
+                } catch (Exception exception){
                     clear();
-                    throw new ArithmeticException("Divide by 0");
+                    throw exception;
                 }
             }
              default:{

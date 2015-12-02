@@ -28,22 +28,18 @@ public class ButtonNumberClickListener implements View.OnClickListener {
         textView = textView_;
     }
 
-
     public void before(){
         String currentText = textView.getText().toString();
         if(currentText.equals("0") || cleanDisplayMode) {
             textView.setText("");
         }
-
     }
 
     public void displayAction(){
         textView.append(value);
         cleanDisplayMode=false;
-        Log.d("listner", "klik klik");
     }
     public void after(){
-
     }
 
     @Override

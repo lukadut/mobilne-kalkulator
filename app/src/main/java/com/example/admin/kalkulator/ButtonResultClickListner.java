@@ -23,11 +23,11 @@ public class ButtonResultClickListner extends ButtonNumberClickListener {
             return;
         }
         cleanDisplayMode=false;
-        String[] parts = currentText.split("[\\+\\-\\*\\/]");
-        if(parts.length==2 && currentText.charAt(0)!='-'|| parts.length==3 && currentText.charAt(0)=='-' || currentText.substring(currentText.length()-1).matches("[\\+\\-\\*\\/]")){
+        //String[] parts = currentText.split("[\\+\\-\\*\\/]");
+        //if(parts.length==2 && currentText.charAt(0)!='-'|| parts.length==3 && currentText.charAt(0)=='-' || currentText.substring(currentText.length()-1).matches("[\\+\\-\\*\\/]")){
             MainActivity.getCalculator().parseText(currentText);
             //textView.setText(MainActivity.calculator.result());
-        }
+        //}
     }
     @Override
     public void displayAction(){
