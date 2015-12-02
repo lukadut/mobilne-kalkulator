@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
  * Created by Łukasz on 2015-11-29.
  */
 public class Calculator {
-
+    Boolean blocked = false;
     double first, second;
     String operation = "";
     //String[] operations = {"+","-","*","/"};
@@ -33,10 +33,21 @@ public class Calculator {
     public String lastOperator(){
         return operation;
     }
+    public Boolean getBlocked(){
+        return blocked;
+    }
     public String result(){
         if((Double.isNaN(second))){
+            if(Double.isInfinite(first)){
+                blocked=true;
+            }
             String res = first+"";
             res = res.replaceFirst("\\.0+", "");
+            if(res.indexOf(".")>=0){
+                ButtonPointClickListner.setAvailablePoint(false);
+            }else{
+                ButtonPointClickListner.setAvailablePoint(true);
+            }
             return res;
         }
         try {
@@ -44,12 +55,21 @@ public class Calculator {
             Log.d("wynik", res);
             res = res.replaceFirst("\\.0+", "");
             first=Double.parseDouble(res);
+            if(res.indexOf(".")>=0){
+                ButtonPointClickListner.setAvailablePoint(false);
+            }else{
+                ButtonPointClickListner.setAvailablePoint(true);
+            }
+            if(Double.isInfinite(first)){
+                blocked=true;
+            }
             if(res.equals("-0")){
                 return "0";
             }
             return  res;
         } catch (Exception e){
             e.printStackTrace();
+            blocked = true;
             return e.getMessage();
         }
 
@@ -96,6 +116,8 @@ public class Calculator {
         return first/second;
     }
     public void clear(){
+        ButtonPointClickListner.setAvailablePoint(true);
+        blocked = false;
         first=0;
         second=Double.NaN;
         operation="";

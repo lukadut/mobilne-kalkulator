@@ -46,12 +46,22 @@ public class ButtonResultClickListner extends ButtonNumberClickListener {
             //textView.setText();
             Log.d("result", "nieistotny blad");
         }
+        currentText = textView.getText().toString();
+        if(currentText.indexOf(".")<0){
+            ButtonPointClickListner.setAvailablePoint(true);
+        }
 
         Log.d("listner", "klik klik");
     }
 
     @Override
     public void after(){
-
+        String currentText = textView.getText().toString();
+        if(currentText.indexOf(".")<0){
+            ButtonPointClickListner.setAvailablePoint(true);
+        }
+        else{
+            ButtonPointClickListner.setAvailablePoint(false);
+        }
     }
 }

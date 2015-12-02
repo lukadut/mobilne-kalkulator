@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("0");
             }
         });
+        dot.setOnClickListener(new ButtonPointClickListner(dot.getText().toString()));
+        back.setOnClickListener(new ButtonBackClickListner());
     }
 
 }

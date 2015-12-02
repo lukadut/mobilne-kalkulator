@@ -48,6 +48,9 @@ public class ButtonNumberClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if(MainActivity.getCalculator().getBlocked()){
+            return;
+        }
         before();
         displayAction();
         after();
