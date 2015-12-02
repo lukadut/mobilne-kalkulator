@@ -16,7 +16,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="false"
-        android:gravity="right" />
+        android:gravity="right"
+        android:maxLength="50" />
 
     <TableLayout
         android:layout_width="fill_parent"
