@@ -46,7 +46,6 @@ public class ButtonPointClickListner extends ButtonNumberClickListener {
     }
     @Override
     public void displayAction(){
-        String currentText = textView.getText().toString();
         if(availablePoint) {
             textView.append(value);
             availablePoint=false;

@@ -11,7 +11,6 @@ public class Calculator {
     Boolean blocked = false;
     double first, second;
     String operation = "";
-    //String[] operations = {"+","-","*","/"};
     public void parseText(String text){
         String[] parts;
         int negativeNumber= 1;
@@ -23,19 +22,13 @@ public class Calculator {
         if(text.indexOf("E-")>=0){
             int index = text.indexOf("E-");
             minusE = text.substring(index,index+2);
-            Log.d("minusE1", minusE);
             text=text.replace("E-","EMINUS");
-            Log.d("minusE2", minusE);
         }
         parts = text.split("[\\+\\-\\*\\/]");//"[\\+\\*-/]"
         if(parts.length>1) {
             operation = text.replaceAll("[\\d\\.\\w]", "");
         }
-        Log.d("minusE1", minusE);
-        Log.d("part10", parts[0]);
-        Log.d("EMINUS POSITION", parts[0].indexOf("EMINUS")+"");
         if(parts[0].indexOf("EMINUS")>=0){
-            Log.d("minusE3", minusE);
             parts[0] = parts[0].replace("EMINUS", minusE);
         }
         first = Double.parseDouble(parts[0])*negativeNumber;
@@ -68,9 +61,6 @@ public class Calculator {
         try {
             String res = calculate();
 
-            Log.d("res.indexOf(\".0\")", res.indexOf(".0")+"");
-            Log.d("res.length()-2", res.length()-2+"");
-            Log.d("wynik", res);
             res = (res.indexOf(".0")==res.length()-2)?  res.replaceFirst("\\.0", "") : res;
 
             first=Double.parseDouble(res);

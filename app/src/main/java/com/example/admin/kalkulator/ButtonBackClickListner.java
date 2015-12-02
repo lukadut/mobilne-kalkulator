@@ -26,7 +26,6 @@ public class ButtonBackClickListner extends ButtonNumberClickListener {
         //String deleted = currentText.substring(newLen);zz
         int lastPoint = currentText.lastIndexOf(".");
         if(newLen>0) {
-            Log.d("usuwam", String.valueOf(currentText.charAt(newLen - 1)).matches("[a-zA-Z\\*\\+\\-\\/]+") + " " + (currentText.charAt(newLen - 1)));
             while (newLen > 0 && String.valueOf(currentText.charAt(newLen - 1)).matches("[a-zA-Z\\*\\+\\-\\/]+")) {
                 newLen--;
             }
@@ -39,15 +38,11 @@ public class ButtonBackClickListner extends ButtonNumberClickListener {
             ButtonPointClickListner.setAvailablePoint(true);
         }
 
-
         textView.setText(currentText);
-        //ButtonPointClickListner.setAvailablePoint(true);
-
     }
 
     @Override
     public void after(){
-
 
     }
 }

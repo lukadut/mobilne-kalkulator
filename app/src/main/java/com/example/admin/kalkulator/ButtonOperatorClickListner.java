@@ -20,7 +20,6 @@ public class ButtonOperatorClickListner extends ButtonNumberClickListener {
         String currentText = textView.getText().toString();
         String[] parts = currentText.split("[\\+\\-\\*\\/]");
         if(parts.length==2 && currentText.charAt(0)!='-' || parts.length==3 && currentText.charAt(0)=='-'){
-            Log.d("partlen", parts.length + "");
             MainActivity.getCalculator().parseText(currentText);
             textView.setText(MainActivity.getCalculator().result());
         }
@@ -39,8 +38,6 @@ public class ButtonOperatorClickListner extends ButtonNumberClickListener {
 
         textView.append(value);
         ButtonPointClickListner.setAvailablePoint(true);
-
-        Log.d("listner", "klik klik");
     }
 
     @Override

@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             b.setOnClickListener(new ButtonNumberClickListener(b.getText().toString()));
             numberButtons.add(b);
         }
-        Log.d("buttony", numberButtons.size() + "");
     }
     private void getSpecialButtons(){
         operationButtons = new ArrayList<Button>();

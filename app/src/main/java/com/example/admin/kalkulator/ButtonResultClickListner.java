@@ -23,11 +23,7 @@ public class ButtonResultClickListner extends ButtonNumberClickListener {
             return;
         }
         cleanDisplayMode=false;
-        //String[] parts = currentText.split("[\\+\\-\\*\\/]");
-        //if(parts.length==2 && currentText.charAt(0)!='-'|| parts.length==3 && currentText.charAt(0)=='-' || currentText.substring(currentText.length()-1).matches("[\\+\\-\\*\\/]")){
-            MainActivity.getCalculator().parseText(currentText);
-            //textView.setText(MainActivity.calculator.result());
-        //}
+        MainActivity.getCalculator().parseText(currentText);
     }
     @Override
     public void displayAction(){
@@ -50,8 +46,6 @@ public class ButtonResultClickListner extends ButtonNumberClickListener {
         if(currentText.indexOf(".")<0){
             ButtonPointClickListner.setAvailablePoint(true);
         }
-
-        Log.d("listner", "klik klik");
     }
 
     @Override
